@@ -1,0 +1,1 @@
+"Build an MCP server in TypeScript that gives AI agents safe, auditable tools for a developer platform: repo dependency-upgrade planning and CI failure triage. Include guardrails (read-only by default, scoped write tools behind explicit approval, audit log, rate limits), tests, and a README that links the AI-DLC inception/construction records. Use only synthetic or public data."
