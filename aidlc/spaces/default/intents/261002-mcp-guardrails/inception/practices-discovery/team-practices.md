@@ -1,9 +1,4 @@
-# Team-Level Rules
-
-> This team's affirmed practices and corrections. Loaded after `org.md` as
-> strict-additive guidance; contradictions with broader policy are rejected.
-> Populated by the practices-discovery affirmation gate. Edit at the gate,
-> not directly.
+# Team Practices
 
 ## Way of Working
 
@@ -26,10 +21,6 @@
 - Coverage floors are never weakened to make a step pass.
 - Automated tests run in GitHub Actions before merge.
 
-## Guard Policy
-
-<!-- Affirmed by the team. Mode: strict, relaxed, or off. Strict here holds for every intent and cannot be changed from chat. A section under the retired Change Control heading, written by an earlier release, is still read. -->
-
 ## Deployment
 
 - Deployment is local. The README.md gives setup instructions for running the server locally.
@@ -45,14 +36,3 @@
 - Formatter: Prettier. Linter: ESLint. A type-check step runs too. All three run as automatic checks, and failures block merge.
 - Naming follows normal TypeScript habits: camelCase for variables and functions, PascalCase for types and classes, kebab-case for file names.
 - A local secret scanner runs before each commit, in addition to repository secret scanning with push protection.
-## Forbidden
-
-<!-- Team-specific forbidden patterns -->
-
-## Mandated
-
-<!-- Team-specific mandates -->
-
-## Corrections
-
-<!-- Self-learning loop appends here. -->
