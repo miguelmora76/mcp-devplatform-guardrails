@@ -4,7 +4,7 @@ Scope: the whole server. The pipeline files already exist in the project folder 
 
 ## Tool and branch strategy
 
-- CI tool: GitHub Actions, public repository `MAM-AI-Projects/mcp-devplatform-guardrails` [TP].
+- CI tool: GitHub Actions, public repository `miguelmora76/mcp-devplatform-guardrails` [TP]. (When this document was approved on 2026-10-05 the repository was `MAM-AI-Projects/mcp-devplatform-guardrails`; it was transferred to the personal account on 2026-10-06. See "Update 2026-10-06" below.)
 - Branch strategy: trunk-based with short-lived branches and pull requests, squash-merged to `main` [TP]. Decision [Q1 A]: create `main` on the remote from the current tip of `ideation-records`, make it the default branch, then open the first pull request from a short-lived branch into it. Today the remote has only `ideation-records`.
 - Node version: every job reads `.nvmrc` (`24`), the same file local setup uses; `engines.node` is `24.x` [BT].
 
@@ -75,6 +75,17 @@ Read-only queries on 2026-10-05 showed: secret scanning `disabled`, push protect
 - `gitleaks/gitleaks-action` requires a licence key (`GITLEAKS_LICENSE`) when the repository belongs to an organisation account; this repository is under the organisation `MAM-AI-Projects`. Without the key the secret-scan job will fail on the first run. Either obtain the key or replace the action with the gitleaks command-line tool run directly in the job (a pinned release with a checked checksum). This is an open decision for the first pull request.
 - The pre-commit hook `scripts/pre-commit-gitleaks.sh` fails the commit when gitleaks is not installed, and gitleaks is not installed on this machine.
 - CodeQL results appear only after the first analysis on the default branch.
+
+## Update 2026-10-06: GitHub setup completed
+
+The gaps above were closed after the CI Pipeline stage was approved, at the human's request:
+
+- The repository was transferred from `MAM-AI-Projects` to `miguelmora76`. The gitleaks licence risk applied only to organisation-owned repositories, so it no longer applies; the secret-scan job passed on its first run.
+- Enabled: secret scanning, push protection, Dependabot security updates, private vulnerability reporting.
+- Q1 A carried out: `main` created from the old `ideation-records` tip and made the default branch; `ideation-records` deleted afterwards as redundant.
+- Q2 A carried out: protection on `main` requires a pull request with zero approvals and these checks, up to date: Format check, Lint, Type check, Tests and coverage, Build, Secret scan (gitleaks), Analyze (JavaScript and TypeScript), Review new dependencies. Linear history, no force pushes, no deletion, applied to administrators too. Squash merge only; merged branches are deleted automatically.
+- First pull request (#1): all ten checks passed on their first run (the eight above, plus CodeQL and the informational Benchmark). It was squash-merged as commit `77f27b3`.
+- Dependabot opened three pull requests (#2 gitleaks-action 3.0.0, #3 `@types/node` 26.6.4, #4 dependency-review-action 5.0.0). #3 conflicts with the Node 24 pin and needs a decision; they are not part of this stage.
 
 ## Sources
 
