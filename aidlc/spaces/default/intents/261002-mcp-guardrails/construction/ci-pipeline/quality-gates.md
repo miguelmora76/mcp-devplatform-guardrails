@@ -33,6 +33,10 @@ Not a gate: the benchmark (`npm run bench`) is informational in CI and enforced 
 - Locally verified (Build and Test, 2026-10-05): formatting, lint, type check, tests (576), coverage (99.37% lines overall; guardrails 417/417 lines and 203/203 branches), build, 0 known vulnerabilities in runtime dependencies, all actions pinned.
 - Not yet verified: secret scan (gitleaks not installed locally), CodeQL, dependency review, and branch protection; all depend on the first pull request and the repository settings (see `ci-config.md`).
 
+## Update 2026-10-06
+
+The previously unverified gates ran on GitHub in pull request #1 and passed: secret scan (gitleaks), CodeQL, dependency review, and all of the job gates above. Branch protection is applied on `main` as described in `ci-config.md`. Gitleaks also ran locally (8.30.1) over the working tree and history with no findings.
+
 ## Sources
 
 - `team.md` and `project.md` practices; `../nfr-requirements/*.md`; `../build-and-test/test-results.md`; Q2 A.

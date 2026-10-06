@@ -22,6 +22,10 @@ PASS WITH OPEN ITEMS. The traceability and test evidence is complete and consist
 - Two minor review notes from Code Generation: a listener-count warning under a very slow output consumer; a request `id` key written with an escape or duplicated gets a null-id error reply.
 - The gitleaks action needs a licence key for an organisation-owned repository (see `ci-config.md`).
 
+## Update 2026-10-06
+
+The open items were addressed after the boundary was crossed: the repository moved to `miguelmora76`, secret scanning, push protection and private vulnerability reporting were enabled, `main` was created and protected, and the first pull request passed all ten checks including CodeQL and gitleaks, then merged as `77f27b3`. The only open Build and Test target is the clean-machine README run (NFR8.7). The two minor Code Generation review notes remain open. Details: `../construction/build-and-test/build-and-test-summary.md` and `../construction/ci-pipeline/ci-config.md`.
+
 ## Human approval
 
 - [ ] Approve crossing the boundary (recorded by approving the CI Pipeline stage gate).

@@ -59,6 +59,20 @@ Applicable targets: 20. Met 15 (T01-T10, T16-T20). Not Met 3 (T12, T13, T14). Un
 - A clean-machine README run (T15) needs a fresh checkout and is best done by the first CI run or by you.
 - Pinned action SHAs were resolved from the real repositories but nobody has re-checked each against its tag comment.
 
+## Update 2026-10-06: follow-up after the stage gate
+
+The matrix above records the state when the stage was approved. The GitHub-dependent targets were then addressed at the human's request; the verdicts above are left as recorded and the later evidence is listed here:
+
+| Target | Later evidence | Status now |
+|--------|----------------|------------|
+| T11 NFR7.4 CodeQL | Ran in pull request #1: `Analyze (JavaScript and TypeScript)` and `CodeQL` passed | Met |
+| T12 NFR7.5 private vulnerability reporting | Enabled; API reports `true`; `SECURITY.md` present | Met |
+| T13 NFR2.3 secret scanning | Secret scanning and push protection enabled; gitleaks ran locally (no findings) and in CI (passed) | Met |
+| T14 NFR6.5 required checks | `main` exists and is the default; protection requires a pull request and eight named checks; all ten checks passed on pull request #1 | Met |
+| T15 NFR8.7 clean-machine README run | CI ran `npm ci`, build, lint, type check and tests on fresh runners; the README steps themselves have not been followed on a clean machine | Unverified (partially evidenced) |
+
+Of the 20 targets, 19 are now Met and 1 (T15) remains Unverified.
+
 ## Assumptions & Open Questions
 
 - [assumption] "Ordinary developer laptop" is this development machine; the numbers are not a guarantee for other hardware.
