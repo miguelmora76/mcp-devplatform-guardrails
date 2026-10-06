@@ -1,0 +1,570 @@
+{
+  "stage": "code-generation",
+  "upstream_ids": [
+    "FR1",
+    "FR2",
+    "FR3",
+    "FR4",
+    "FR5",
+    "FR6",
+    "FR7",
+    "FR8",
+    "FR9",
+    "NFR1",
+    "NFR2",
+    "NFR3",
+    "NFR4",
+    "NFR5",
+    "NFR6",
+    "NFR7",
+    "NFR8",
+    "FR1.1",
+    "FR1.2",
+    "FR1.3",
+    "FR1.4",
+    "FR1.5",
+    "FR2.1",
+    "FR2.2",
+    "FR2.3",
+    "FR2.4",
+    "FR2.5",
+    "FR3.1",
+    "FR3.2",
+    "FR3.3",
+    "FR3.4",
+    "FR4.1",
+    "FR4.2",
+    "FR4.3",
+    "FR4.4",
+    "FR5.1",
+    "FR5.2",
+    "FR6.1",
+    "FR6.2",
+    "FR6.3",
+    "FR6.4",
+    "FR7.1",
+    "FR7.2",
+    "FR8.1",
+    "FR8.2",
+    "FR9.1",
+    "FR9.2",
+    "NFR1.1",
+    "NFR1.2",
+    "NFR1.3",
+    "NFR1.4",
+    "NFR1.5",
+    "NFR1.6",
+    "NFR1.7",
+    "NFR1.8",
+    "NFR1.9",
+    "NFR1.10",
+    "NFR1.11",
+    "NFR1.12",
+    "NFR1.13",
+    "NFR1.14",
+    "NFR1.15",
+    "NFR1.16",
+    "NFR1.17",
+    "NFR1.18",
+    "NFR1.19",
+    "NFR1.20",
+    "NFR2.1",
+    "NFR2.2",
+    "NFR2.3",
+    "NFR2.4",
+    "NFR3.1",
+    "NFR3.2",
+    "NFR3.3",
+    "NFR4.1",
+    "NFR4.2",
+    "NFR4.3",
+    "NFR4.4",
+    "NFR4.5",
+    "NFR4.6",
+    "NFR5.1",
+    "NFR5.2",
+    "NFR5.3",
+    "NFR6.1",
+    "NFR6.2",
+    "NFR6.3",
+    "NFR6.4",
+    "NFR6.5",
+    "NFR7.1",
+    "NFR7.2",
+    "NFR7.3",
+    "NFR7.4",
+    "NFR7.5",
+    "NFR8.1",
+    "NFR8.2",
+    "NFR8.3",
+    "NFR8.4",
+    "NFR8.5",
+    "NFR8.6",
+    "NFR8.7",
+    "NFR8.8"
+  ],
+  "coverage": [
+    { "id": "FR1", "status": "OK", "target": "src/tools/plan-dependency-upgrades.ts" },
+    { "id": "FR2", "status": "OK", "target": "src/tools/triage-ci-failure.ts" },
+    { "id": "FR3", "status": "OK", "target": "src/data/snapshot-store.ts" },
+    { "id": "FR4", "status": "OK", "target": "src/guardrails/approval.ts" },
+    { "id": "FR5", "status": "OK", "target": "src/guardrails/wrapper.ts" },
+    { "id": "FR6", "status": "OK", "target": "src/guardrails/audit.ts" },
+    { "id": "FR7", "status": "OK", "target": "src/guardrails/rate-limiter.ts" },
+    { "id": "FR8", "status": "OK", "target": "src/transport/mcp-server.ts" },
+    { "id": "FR9", "status": "OK", "target": "README.md" },
+    { "id": "NFR1", "status": "OK", "target": "src/guardrails/wrapper.ts" },
+    { "id": "NFR2", "status": "OK", "target": "src/core/redactor.ts" },
+    { "id": "NFR3", "status": "OK", "target": "vitest.config.ts" },
+    { "id": "NFR4", "status": "OK", "target": "test/guardrails/wrapper.test.ts" },
+    { "id": "NFR5", "status": "OK", "target": "src/core/ports.ts" },
+    { "id": "NFR6", "status": "OK", "target": "tsconfig.json" },
+    { "id": "NFR7", "status": "OK", "target": "package-lock.json" },
+    { "id": "NFR8", "status": "OK", "target": "README.md" },
+    {
+      "id": "FR1.1",
+      "status": "OK",
+      "target": "src/tools/plan-dependency-upgrades.ts"
+    },
+    {
+      "id": "FR1.2",
+      "status": "OK",
+      "target": "src/data/semver.ts"
+    },
+    {
+      "id": "FR1.3",
+      "status": "OK",
+      "target": "src/tools/plan-dependency-upgrades.ts"
+    },
+    {
+      "id": "FR1.4",
+      "status": "OK",
+      "target": "src/tools/plan-dependency-upgrades.ts"
+    },
+    {
+      "id": "FR1.5",
+      "status": "OK",
+      "target": "test/tools/plan-dependency-upgrades.test.ts"
+    },
+    {
+      "id": "FR2.1",
+      "status": "OK",
+      "target": "src/tools/triage-ci-failure.ts"
+    },
+    {
+      "id": "FR2.2",
+      "status": "OK",
+      "target": "src/tools/triage-ci-failure.ts"
+    },
+    {
+      "id": "FR2.3",
+      "status": "OK",
+      "target": "src/tools/triage-ci-failure.ts"
+    },
+    {
+      "id": "FR2.4",
+      "status": "OK",
+      "target": "src/tools/triage-ci-failure.ts"
+    },
+    {
+      "id": "FR2.5",
+      "status": "OK",
+      "target": "test/tools/triage-ci-failure.test.ts"
+    },
+    {
+      "id": "FR3.1",
+      "status": "OK",
+      "target": "src/data/live-github.ts"
+    },
+    {
+      "id": "FR3.2",
+      "status": "OK",
+      "target": "test/e2e/walkthrough.test.ts"
+    },
+    {
+      "id": "FR3.3",
+      "status": "OK",
+      "target": "test/e2e/live-mode.test.ts"
+    },
+    {
+      "id": "FR3.4",
+      "status": "OK",
+      "target": "src/core/repository-ref.ts"
+    },
+    {
+      "id": "FR4.1",
+      "status": "OK",
+      "target": "src/data/simulated-ci.ts"
+    },
+    {
+      "id": "FR4.2",
+      "status": "OK",
+      "target": "test/e2e/approval-flow.test.ts"
+    },
+    {
+      "id": "FR4.3",
+      "status": "OK",
+      "target": "src/guardrails/admin-channel.ts"
+    },
+    {
+      "id": "FR4.4",
+      "status": "OK",
+      "target": "src/guardrails/approval.ts"
+    },
+    {
+      "id": "FR5.1",
+      "status": "OK",
+      "target": "test/tools/registry.test.ts"
+    },
+    {
+      "id": "FR5.2",
+      "status": "OK",
+      "target": "src/guardrails/wrapper.ts"
+    },
+    {
+      "id": "FR6.1",
+      "status": "OK",
+      "target": "src/guardrails/audit.ts"
+    },
+    {
+      "id": "FR6.2",
+      "status": "OK",
+      "target": "src/guardrails/audit.ts"
+    },
+    {
+      "id": "FR6.3",
+      "status": "OK",
+      "target": "src/core/redactor.ts"
+    },
+    {
+      "id": "FR6.4",
+      "status": "OK",
+      "target": "test/guardrails/audit.test.ts"
+    },
+    {
+      "id": "FR7.1",
+      "status": "OK",
+      "target": "src/guardrails/rate-limiter.ts"
+    },
+    {
+      "id": "FR7.2",
+      "status": "OK",
+      "target": "test/guardrails/wrapper.test.ts"
+    },
+    {
+      "id": "FR8.1",
+      "status": "OK",
+      "target": "src/transport/stdio.ts"
+    },
+    {
+      "id": "FR8.2",
+      "status": "OK",
+      "target": "src/transport/http.ts"
+    },
+    {
+      "id": "FR9.1",
+      "status": "OK",
+      "target": "README.md"
+    },
+    {
+      "id": "FR9.2",
+      "status": "OK",
+      "target": "src/walkthrough.ts"
+    },
+    {
+      "id": "NFR1.1",
+      "status": "OK",
+      "target": "src/core/validator.ts"
+    },
+    {
+      "id": "NFR1.1",
+      "status": "OK",
+      "target": "src/transport/stdio.ts"
+    },
+    {
+      "id": "NFR1.1",
+      "status": "OK",
+      "target": "src/transport/http.ts"
+    },
+    {
+      "id": "NFR1.2",
+      "status": "OK",
+      "target": "test/e2e/approval-flow.test.ts"
+    },
+    {
+      "id": "NFR1.3",
+      "status": "OK",
+      "target": "src/guardrails/approval.ts"
+    },
+    {
+      "id": "NFR1.4",
+      "status": "OK",
+      "target": "src/transport/http.ts"
+    },
+    {
+      "id": "NFR1.5",
+      "status": "OK",
+      "target": "src/guardrails/wrapper.ts"
+    },
+    {
+      "id": "NFR1.6",
+      "status": "OK",
+      "target": "src/core/repository-ref.ts"
+    },
+    {
+      "id": "NFR1.7",
+      "status": "OK",
+      "target": "src/core/errors.ts"
+    },
+    {
+      "id": "NFR1.8",
+      "status": "OK",
+      "target": "src/guardrails/rate-limiter.ts"
+    },
+    {
+      "id": "NFR1.9",
+      "status": "OK",
+      "target": "src/guardrails/approval.ts"
+    },
+    {
+      "id": "NFR1.10",
+      "status": "OK",
+      "target": "test/guardrails/audit.test.ts"
+    },
+    {
+      "id": "NFR1.11",
+      "status": "OK",
+      "target": "src/data/snapshot-store.ts"
+    },
+    {
+      "id": "NFR1.12",
+      "status": "OK",
+      "target": "src/guardrails/wrapper.ts"
+    },
+    {
+      "id": "NFR1.13",
+      "status": "OK",
+      "target": "src/guardrails/audit.ts"
+    },
+    {
+      "id": "NFR1.14",
+      "status": "OK",
+      "target": "src/guardrails/wrapper.ts"
+    },
+    {
+      "id": "NFR1.15",
+      "status": "OK",
+      "target": "src/core/lifecycle.ts"
+    },
+    {
+      "id": "NFR1.16",
+      "status": "OK",
+      "target": "src/transport/failed-login-queue.ts"
+    },
+    {
+      "id": "NFR1.17",
+      "status": "OK",
+      "target": "src/guardrails/rate-limiter.ts"
+    },
+    {
+      "id": "NFR1.18",
+      "status": "OK",
+      "target": "src/guardrails/audit.ts"
+    },
+    {
+      "id": "NFR1.19",
+      "status": "OK",
+      "target": "src/transport/http.ts"
+    },
+    {
+      "id": "NFR1.20",
+      "status": "OK",
+      "target": "src/guardrails/audit.ts"
+    },
+    {
+      "id": "NFR2.1",
+      "status": "OK",
+      "target": "src/core/config.ts"
+    },
+    {
+      "id": "NFR2.2",
+      "status": "OK",
+      "target": "src/core/redactor.ts"
+    },
+    {
+      "id": "NFR2.3",
+      "status": "OK",
+      "target": ".gitleaks.toml"
+    },
+    {
+      "id": "NFR2.4",
+      "status": "OK",
+      "target": "src/core/logger.ts"
+    },
+    {
+      "id": "NFR3.1",
+      "status": "OK",
+      "target": "vitest.config.ts"
+    },
+    {
+      "id": "NFR3.2",
+      "status": "OK",
+      "target": "vitest.config.ts"
+    },
+    {
+      "id": "NFR3.3",
+      "status": "OK",
+      "target": "vitest.config.ts"
+    },
+    {
+      "id": "NFR4.1",
+      "status": "OK",
+      "target": "test/e2e/skeleton.test.ts"
+    },
+    {
+      "id": "NFR4.2",
+      "status": "OK",
+      "target": "test/guardrails/wrapper.test.ts"
+    },
+    {
+      "id": "NFR4.3",
+      "status": "OK",
+      "target": "test/tools/registry.test.ts"
+    },
+    {
+      "id": "NFR4.4",
+      "status": "OK",
+      "target": "test/e2e/approval-flow.test.ts"
+    },
+    {
+      "id": "NFR4.5",
+      "status": "OK",
+      "target": "src/data/live-github.ts"
+    },
+    {
+      "id": "NFR4.6",
+      "status": "OK",
+      "target": "test/e2e/live-mode.test.ts"
+    },
+    {
+      "id": "NFR5.1",
+      "status": "OK",
+      "target": "test/support/setup.ts"
+    },
+    {
+      "id": "NFR5.2",
+      "status": "OK",
+      "target": "src/core/ports.ts"
+    },
+    {
+      "id": "NFR5.3",
+      "status": "OK",
+      "target": "test/support/fakes.ts"
+    },
+    {
+      "id": "NFR6.1",
+      "status": "OK",
+      "target": "tsconfig.json"
+    },
+    {
+      "id": "NFR6.2",
+      "status": "OK",
+      "target": ".prettierrc"
+    },
+    {
+      "id": "NFR6.3",
+      "status": "OK",
+      "target": "eslint.config.js"
+    },
+    {
+      "id": "NFR6.4",
+      "status": "OK",
+      "target": ".github/workflows/ci.yml"
+    },
+    {
+      "id": "NFR6.5",
+      "status": "OK",
+      "target": ".github/workflows/ci.yml"
+    },
+    {
+      "id": "NFR7.1",
+      "status": "OK",
+      "target": "package-lock.json"
+    },
+    {
+      "id": "NFR7.2",
+      "status": "OK",
+      "target": ".github/workflows/ci.yml"
+    },
+    {
+      "id": "NFR7.3",
+      "status": "OK",
+      "target": ".github/workflows/dependency-review.yml"
+    },
+    {
+      "id": "NFR7.4",
+      "status": "OK",
+      "target": ".github/workflows/codeql.yml"
+    },
+    {
+      "id": "NFR7.5",
+      "status": "OK",
+      "target": "SECURITY.md"
+    },
+    {
+      "id": "NFR8.1",
+      "status": "OK",
+      "target": "src/bin/bench.ts"
+    },
+    {
+      "id": "NFR8.2",
+      "status": "OK",
+      "target": "src/bin/bench.ts"
+    },
+    {
+      "id": "NFR8.3",
+      "status": "OK",
+      "target": "src/bin/bench.ts"
+    },
+    {
+      "id": "NFR8.4",
+      "status": "OK",
+      "target": "src/data/live-github.ts"
+    },
+    {
+      "id": "NFR8.5",
+      "status": "OK",
+      "target": "src/core/logger.ts"
+    },
+    {
+      "id": "NFR8.6",
+      "status": "OK",
+      "target": "src/core/lifecycle.ts"
+    },
+    {
+      "id": "NFR8.6",
+      "status": "OK",
+      "target": "src/transport/http.ts"
+    },
+    {
+      "id": "NFR8.6",
+      "status": "OK",
+      "target": "src/guardrails/wrapper.ts"
+    },
+    {
+      "id": "NFR8.6",
+      "status": "OK",
+      "target": "src/data/live-github.ts"
+    },
+    {
+      "id": "NFR8.7",
+      "status": "OK",
+      "target": "README.md"
+    },
+    {
+      "id": "NFR8.8",
+      "status": "OK",
+      "target": ".nvmrc"
+    }
+  ]
+}

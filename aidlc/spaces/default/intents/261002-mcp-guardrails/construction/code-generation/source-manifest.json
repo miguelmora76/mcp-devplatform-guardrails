@@ -1,0 +1,123 @@
+{
+  "stage": "code-generation",
+  "version": 1,
+  "writes": [
+    {
+      "path": "src/"
+    },
+    {
+      "path": "test/"
+    },
+    {
+      "path": "snapshots/"
+    },
+    {
+      "path": ".github/"
+    },
+    {
+      "path": "scripts/"
+    },
+    {
+      "path": ".gitleaks.toml"
+    },
+    {
+      "path": ".nvmrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "SECURITY.md"
+    },
+    {
+      "path": "eslint.config.js"
+    },
+    {
+      "path": "package-lock.json"
+    },
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "tsconfig.build.json"
+    },
+    {
+      "path": "tsconfig.json"
+    },
+    {
+      "path": "vitest.config.ts"
+    },
+    {
+      "path": "src/serve.ts"
+    },
+    {
+      "path": "src/bench.ts"
+    },
+    {
+      "path": "src/walkthrough.ts"
+    },
+    {
+      "path": "src/transport/stdio.ts"
+    },
+    {
+      "path": "src/transport/mcp-server.ts"
+    },
+    {
+      "path": "src/data/live-github.ts"
+    },
+    {
+      "path": "src/tools/triage-ci-failure.ts"
+    },
+    {
+      "path": "src/core/sanitize.ts"
+    },
+    {
+      "path": "src/core/errors.ts"
+    },
+    {
+      "path": "src/guardrails/wrapper.ts"
+    },
+    {
+      "path": "src/app.ts"
+    },
+    {
+      "path": "src/bin/server.ts"
+    },
+    {
+      "path": "src/bin/bench.ts"
+    },
+    {
+      "path": "test/serve.test.ts"
+    },
+    {
+      "path": "test/bench.test.ts"
+    },
+    {
+      "path": "test/transport/stdio.test.ts"
+    },
+    {
+      "path": "test/support/stream-transport.ts"
+    },
+    {
+      "path": "test/support/harness.ts"
+    },
+    {
+      "path": "src/transport/id-scanner.ts"
+    },
+    {
+      "path": "test/transport/id-scanner.test.ts"
+    },
+    {
+      "path": "test/core/lifecycle.test.ts"
+    }
+  ]
+}

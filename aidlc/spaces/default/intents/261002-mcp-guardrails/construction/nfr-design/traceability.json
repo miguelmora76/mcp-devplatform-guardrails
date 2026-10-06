@@ -1,0 +1,331 @@
+{
+  "stage": "nfr-design",
+  "upstream_ids": [
+    "NFR1.1",
+    "NFR1.2",
+    "NFR1.3",
+    "NFR1.4",
+    "NFR1.5",
+    "NFR1.6",
+    "NFR1.7",
+    "NFR1.8",
+    "NFR1.9",
+    "NFR1.10",
+    "NFR1.11",
+    "NFR1.12",
+    "NFR1.13",
+    "NFR1.14",
+    "NFR1.15",
+    "NFR1.16",
+    "NFR1.17",
+    "NFR1.18",
+    "NFR1.19",
+    "NFR1.20",
+    "NFR2.1",
+    "NFR2.2",
+    "NFR2.3",
+    "NFR2.4",
+    "NFR3.1",
+    "NFR3.2",
+    "NFR3.3",
+    "NFR4.1",
+    "NFR4.2",
+    "NFR4.3",
+    "NFR4.4",
+    "NFR4.5",
+    "NFR4.6",
+    "NFR5.1",
+    "NFR5.2",
+    "NFR5.3",
+    "NFR6.1",
+    "NFR6.2",
+    "NFR6.3",
+    "NFR6.4",
+    "NFR6.5",
+    "NFR7.1",
+    "NFR7.2",
+    "NFR7.3",
+    "NFR7.4",
+    "NFR7.5",
+    "NFR8.1",
+    "NFR8.2",
+    "NFR8.3",
+    "NFR8.4",
+    "NFR8.5",
+    "NFR8.6",
+    "NFR8.7",
+    "NFR8.8"
+  ],
+  "coverage": [
+    {
+      "id": "NFR1.1",
+      "status": "OK",
+      "target": "security-design.md Input validation (LC-05, zod schemas)"
+    },
+    {
+      "id": "NFR1.2",
+      "status": "OK",
+      "target": "security-design.md Untrusted outside text (LC-16)"
+    },
+    {
+      "id": "NFR1.3",
+      "status": "OK",
+      "target": "security-design.md Approval design (LC-07, LC-08)"
+    },
+    {
+      "id": "NFR1.4",
+      "status": "OK",
+      "target": "security-design.md HTTP mode (LC-02, LC-03, LC-17)"
+    },
+    {
+      "id": "NFR1.5",
+      "status": "OK",
+      "target": "reliability-design.md Audit ordering and counting (LC-04, LC-09)"
+    },
+    {
+      "id": "NFR1.6",
+      "status": "OK",
+      "target": "security-design.md Input validation and Live reader security (LC-05, LC-14)"
+    },
+    {
+      "id": "NFR1.7",
+      "status": "OK",
+      "target": "security-design.md Error handling (LC-04 mapper)"
+    },
+    {
+      "id": "NFR1.8",
+      "status": "OK",
+      "target": "scalability-design.md Per-client isolation (LC-03, LC-06, LC-07)"
+    },
+    {
+      "id": "NFR1.9",
+      "status": "OK",
+      "target": "scalability-design.md Bounded state (LC-06, LC-07, LC-17)"
+    },
+    {
+      "id": "NFR1.10",
+      "status": "OK",
+      "target": "scalability-design.md Concurrency (LC-09 queue)"
+    },
+    {
+      "id": "NFR1.11",
+      "status": "OK",
+      "target": "scalability-design.md Data size limits (LC-13)"
+    },
+    {
+      "id": "NFR1.12",
+      "status": "OK",
+      "target": "reliability-design.md Failure handling table (LC-04, LC-09)"
+    },
+    {
+      "id": "NFR1.13",
+      "status": "OK",
+      "target": "reliability-design.md Audit file safety (LC-09)"
+    },
+    {
+      "id": "NFR1.14",
+      "status": "OK",
+      "target": "reliability-design.md Failure handling table (LC-04 error boundary)"
+    },
+    {
+      "id": "NFR1.15",
+      "status": "OK",
+      "target": "reliability-design.md Shutdown and health (LC-18)"
+    },
+    {
+      "id": "NFR1.16",
+      "status": "OK",
+      "target": "security-design.md HTTP mode (LC-02), serialised failed-login queue (proposed change to NFR1.16 wording, see logical-components.md clarifications)"
+    },
+    {
+      "id": "NFR1.17",
+      "status": "OK",
+      "target": "scalability-design.md Per-client isolation (LC-06 fixed window) and security-design.md Approval design (LC-07 inclusive expiry)"
+    },
+    {
+      "id": "NFR1.18",
+      "status": "OK",
+      "target": "reliability-design.md Audit file safety, cap (LC-09)"
+    },
+    {
+      "id": "NFR1.19",
+      "status": "OK",
+      "target": "observability-design.md Correlation and Event catalogue (LC-11)"
+    },
+    {
+      "id": "NFR1.20",
+      "status": "OK",
+      "target": "reliability-design.md Audit file safety, lock file (LC-09)"
+    },
+    {
+      "id": "NFR2.1",
+      "status": "OK",
+      "target": "security-design.md Secrets and redaction (LC-17)"
+    },
+    {
+      "id": "NFR2.2",
+      "status": "OK",
+      "target": "security-design.md Secrets and redaction (LC-10)"
+    },
+    {
+      "id": "NFR2.3",
+      "status": "OK",
+      "target": "security-design.md Secrets and redaction, repository controls"
+    },
+    {
+      "id": "NFR2.4",
+      "status": "OK",
+      "target": "observability-design.md Operational log (LC-11, LC-10)"
+    },
+    {
+      "id": "NFR3.1",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, global coverage threshold"
+    },
+    {
+      "id": "NFR3.2",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, per-path 100% thresholds (LC-04, LC-06, LC-07, LC-08, LC-09)"
+    },
+    {
+      "id": "NFR3.3",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, listed exclusions with reasons"
+    },
+    {
+      "id": "NFR4.1",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, Given/When/Then beside code"
+    },
+    {
+      "id": "NFR4.2",
+      "status": "OK",
+      "target": "reliability-design.md Audit ordering and counting and observability-design.md Audit log observability"
+    },
+    {
+      "id": "NFR4.3",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, registry test (LC-04)"
+    },
+    {
+      "id": "NFR4.4",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, named behaviour tests"
+    },
+    {
+      "id": "NFR4.5",
+      "status": "OK",
+      "target": "reliability-design.md Live reader resilience (LC-14)"
+    },
+    {
+      "id": "NFR4.6",
+      "status": "OK",
+      "target": "reliability-design.md Live reader resilience, stub Net port when off (LC-14, LC-12)"
+    },
+    {
+      "id": "NFR5.1",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, socket-creation guard"
+    },
+    {
+      "id": "NFR5.2",
+      "status": "OK",
+      "target": "logical-components.md Component inventory, LC-12 Ports (Clock, Scheduler)"
+    },
+    {
+      "id": "NFR5.3",
+      "status": "OK",
+      "target": "logical-components.md Component inventory, LC-12 Ports (IdSource, Rng)"
+    },
+    {
+      "id": "NFR6.1",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, toolchain"
+    },
+    {
+      "id": "NFR6.2",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, toolchain"
+    },
+    {
+      "id": "NFR6.3",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, toolchain"
+    },
+    {
+      "id": "NFR6.4",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, toolchain"
+    },
+    {
+      "id": "NFR6.5",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, required checks"
+    },
+    {
+      "id": "NFR7.1",
+      "status": "OK",
+      "target": "security-design.md Secrets and redaction, repository controls (npm ci, lockfile)"
+    },
+    {
+      "id": "NFR7.2",
+      "status": "OK",
+      "target": "security-design.md Secrets and redaction, repository controls (pinned Actions)"
+    },
+    {
+      "id": "NFR7.3",
+      "status": "OK",
+      "target": "security-design.md Secrets and redaction, repository controls (runtime dependencies SDK and zod only)"
+    },
+    {
+      "id": "NFR7.4",
+      "status": "OK",
+      "target": "security-design.md Secrets and redaction, repository controls (CodeQL)"
+    },
+    {
+      "id": "NFR7.5",
+      "status": "OK",
+      "target": "security-design.md Secrets and redaction, repository controls (SECURITY.md)"
+    },
+    {
+      "id": "NFR8.1",
+      "status": "OK",
+      "target": "performance-design.md Latency budget and Measurement design"
+    },
+    {
+      "id": "NFR8.2",
+      "status": "OK",
+      "target": "performance-design.md Latency budget (write path) and Measurement design"
+    },
+    {
+      "id": "NFR8.3",
+      "status": "OK",
+      "target": "performance-design.md Latency budget (guardrail overhead)"
+    },
+    {
+      "id": "NFR8.4",
+      "status": "OK",
+      "target": "performance-design.md Live reading"
+    },
+    {
+      "id": "NFR8.5",
+      "status": "OK",
+      "target": "observability-design.md Operational log (LC-11)"
+    },
+    {
+      "id": "NFR8.6",
+      "status": "OK",
+      "target": "observability-design.md Event catalogue (LC-11)"
+    },
+    {
+      "id": "NFR8.7",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, README commands"
+    },
+    {
+      "id": "NFR8.8",
+      "status": "OK",
+      "target": "logical-components.md Test seams and quality gates, pinned Node version"
+    }
+  ]
+}
