@@ -26,3 +26,4 @@ jobs:
         Accept: application/json, text/event-stream
       smoke-expect: protocolVersion
       smoke-bearer-secret-key: GUARDRAILS_TOKENS
+      platform-ref: add-smoke-cli
