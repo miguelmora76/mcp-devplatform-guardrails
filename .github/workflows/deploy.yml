@@ -1,0 +1,21 @@
+name: deploy-smoke
+
+on:
+  pull_request:
+    paths: [Dockerfile, deploy/**, .github/workflows/deploy.yml]
+  push:
+    branches: [main]
+    paths: [Dockerfile, deploy/**, .github/workflows/deploy.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-deploy:
+    uses: miguelmora76/platform-workflows/.github/workflows/build-deploy.yml@main
+    with:
+      service: mcp-devplatform-guardrails
+      values-file: deploy/values.yaml
+      secret-name: mcp-guardrails-tokens
+      secret-key: GUARDRAILS_TOKENS
+      secret-prefix: local=mgt_
