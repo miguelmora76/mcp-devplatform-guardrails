@@ -49,6 +49,21 @@ export async function prepareSocketDirectory(dir: string, uid: number): Promise<
   }
 }
 
+/**
+ * Longest Unix socket path, in bytes, the platform accepts (the size of `sun_path` minus
+ * the terminating zero: 104 on macOS and the BSDs, 108 on Linux).
+ */
+export function defaultMaxSocketPathBytes(platform: string): number {
+  return platform === 'darwin' ? 103 : 107;
+}
+
+function socketPathTooLong(bytes: number, limit: number): UnsafeSocketDirectoryError {
+  return new UnsafeSocketDirectoryError(
+    `The approval socket path is ${bytes} bytes long, but this system allows at most ${limit}. ` +
+      'Set GUARDRAILS_SOCKET_DIR to a shorter folder (for example /tmp/guardrails-run).',
+  );
+}
+
 export interface AdminChannelOptions {
   readonly dir: string;
   readonly approvals: ApprovalService;
@@ -59,6 +74,8 @@ export interface AdminChannelOptions {
   readonly uid?: number;
   readonly pid?: number;
   readonly isAlive?: (pid: number) => boolean;
+  /** Test seam: the longest socket path accepted; defaults to the platform's limit. */
+  readonly maxSocketPathBytes?: number;
 }
 
 export class AdminChannel {
@@ -82,6 +99,9 @@ export class AdminChannel {
   }
 
   async start(): Promise<void> {
+    const limit = this.options.maxSocketPathBytes ?? defaultMaxSocketPathBytes(process.platform);
+    const bytes = Buffer.byteLength(this.socketPath);
+    if (bytes > limit) throw socketPathTooLong(bytes, limit);
     // getuid exists on macOS and Linux, the supported platforms.
     const uid = this.options.uid ?? (process.getuid as () => number)();
     await prepareSocketDirectory(this.options.dir, uid);
@@ -91,7 +111,11 @@ export class AdminChannel {
       this.serve(socket);
     });
     await new Promise<void>((resolve, reject) => {
-      server.once('error', reject);
+      server.once('error', (error: NodeJS.ErrnoException) => {
+        // The system may reject a path length our own check let through.
+        const tooLong = error.code === 'EINVAL' || error.code === 'ENAMETOOLONG';
+        reject(tooLong ? socketPathTooLong(bytes, limit) : error);
+      });
       server.listen(this.socketPath, () => {
         server.off('error', reject);
         resolve();

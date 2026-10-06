@@ -3,7 +3,8 @@ import { closeSync, openSync } from 'node:fs';
 import { createInterface } from 'node:readline';
 import { ReadStream, WriteStream } from 'node:tty';
 import { loadConfig } from '../core/config.js';
-import { runApprove, type Terminal } from '../guardrails/admin-client.js';
+import { runApprove } from '../guardrails/admin-client.js';
+import { openTerminal, type OpenTerminal } from '../terminal.js';
 
 /**
  * `approve [requestId]`: a human's command for approving a pending write. It talks to a
@@ -12,33 +13,35 @@ import { runApprove, type Terminal } from '../guardrails/admin-client.js';
  * answer for the human. The logic lives in src/guardrails/admin-client.ts.
  */
 
-function openTerminal(): { terminal: Terminal; close: () => void } | undefined {
-  let fd: number;
-  try {
-    fd = openSync('/dev/tty', 'r+');
-  } catch {
-    return undefined;
-  }
-  const input = new ReadStream(fd);
-  const output = new WriteStream(fd);
-  const lines = createInterface({ input, output });
-  return {
-    terminal: {
-      ask: (question) =>
-        new Promise((resolve) => {
-          lines.question(question, resolve);
-        }),
-    },
-    close: () => {
-      lines.close();
+/** Opens the real controlling terminal; each stream owns its own descriptor. */
+function openRealTerminal(): OpenTerminal | undefined {
+  return openTerminal({
+    open: (mode) => openSync('/dev/tty', mode),
+    closeFd: (fd) => {
       closeSync(fd);
     },
-  };
+    createInput: (fd) => new ReadStream(fd),
+    createOutput: (fd) => new WriteStream(fd),
+    createLines: (input, output) => {
+      const lines = createInterface({ input: input as ReadStream, output: output as WriteStream });
+      return {
+        question: (prompt, callback) => {
+          lines.question(prompt, callback);
+        },
+        close: () => {
+          lines.close();
+        },
+        onClose: (callback) => {
+          lines.once('close', callback);
+        },
+      };
+    },
+  });
 }
 
 async function main(): Promise<number> {
   const ref = process.argv[2];
-  const opened = openTerminal();
+  const opened = openRealTerminal();
   try {
     return await runApprove({
       dir: loadConfig(process.env).socketDir,

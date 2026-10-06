@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { requestServer } from '../../src/guardrails/admin-client.js';
 import type { AdminChannel } from '../../src/guardrails/admin-channel.js';
 import {
+  defaultMaxSocketPathBytes,
   prepareSocketDirectory,
   UnsafeSocketDirectoryError,
 } from '../../src/guardrails/admin-channel.js';
@@ -56,6 +57,51 @@ describe('Given the socket directory', () => {
     await mkdir(join(fixture.root, 'real'), { mode: 0o700 });
     await symlink(join(fixture.root, 'real'), fixture.dir);
     await expect(fixture.channel().start()).rejects.toThrow(/folder/);
+  });
+});
+
+describe('Given a socket path that may be too long for the operating system', () => {
+  const longDir = () => join(fixture.root, 'x'.repeat(120), 'run');
+
+  it('When the socket path is over the limit, then startup is refused with a plain message naming the setting and the limit, before anything is created', async () => {
+    const channel = fixture.channel({ pid: 4301, dir: longDir(), maxSocketPathBytes: 60 });
+    await expect(channel.start()).rejects.toBeInstanceOf(UnsafeSocketDirectoryError);
+    await expect(channel.start()).rejects.toThrow(/GUARDRAILS_SOCKET_DIR/);
+    await expect(channel.start()).rejects.toThrow(/at most 60/);
+    expect(await readdir(fixture.root)).toEqual([]);
+  });
+
+  it('When the socket path is exactly at the limit it starts, and one byte over it is refused', async () => {
+    const path = join(fixture.dir, '4302.sock');
+    const exact = Buffer.byteLength(path);
+    await fixture.channel({ pid: 4302, maxSocketPathBytes: exact }).start();
+    await expect(
+      fixture.channel({ pid: 4302, maxSocketPathBytes: exact - 1, isAlive: () => true }).start(),
+    ).rejects.toBeInstanceOf(UnsafeSocketDirectoryError);
+  });
+
+  it('When the operating system itself rejects the length, then the same plain message is given', async () => {
+    const channel = fixture.channel({ pid: 4303, dir: longDir(), maxSocketPathBytes: 100_000 });
+    const error = await channel.start().catch((caught: unknown) => caught);
+    expect(error).toBeInstanceOf(UnsafeSocketDirectoryError);
+    expect((error as Error).message).toContain('GUARDRAILS_SOCKET_DIR');
+  });
+
+  it('When listening fails for another reason, then that error is raised unchanged', async () => {
+    await mkdir(fixture.dir, { recursive: true, mode: 0o700 });
+    await chmod(fixture.dir, 0o500);
+    try {
+      await expect(fixture.channel({ pid: 4304 }).start()).rejects.toMatchObject({
+        code: 'EACCES',
+      });
+    } finally {
+      await chmod(fixture.dir, 0o700);
+    }
+  });
+
+  it('When no limit is given, then the platform default is used and is below the operating system maximum', () => {
+    expect(defaultMaxSocketPathBytes('darwin')).toBe(103);
+    expect(defaultMaxSocketPathBytes('linux')).toBe(107);
   });
 });
 

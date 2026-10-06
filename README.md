@@ -100,6 +100,13 @@ log line and one audit record with outcome `invalid`, and keeps serving.
 The approval travels over a Unix socket in `~/.mcp-guardrails/run/` (owner-only folder, one
 socket per server process), never through an MCP tool or HTTP route. macOS and Linux only.
 
+The socket path (`<GUARDRAILS_SOCKET_DIR>/<pid>.sock`) must fit the operating system's limit:
+103 bytes on macOS, 107 on Linux. With a long `HOME` or `GUARDRAILS_SOCKET_DIR` the server
+refuses to start and says so in one log line that names the setting and the limit (set
+`GUARDRAILS_SOCKET_DIR` to a short folder such as `/tmp/guardrails-run`). For any other
+unexpected startup failure the log line carries only the Node error code (for example
+`EACCES`), never the message or a path, so you can search for it.
+
 A write is also refused up front if it cannot succeed (for example the job did not fail),
 so you are never asked to approve something impossible.
 
