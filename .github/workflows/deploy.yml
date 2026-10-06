@@ -19,3 +19,10 @@ jobs:
       secret-name: mcp-guardrails-tokens
       secret-key: GUARDRAILS_TOKENS
       secret-prefix: local=mgt_
+      smoke-port: '8787'
+      smoke-path: /mcp
+      smoke-body: '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"smoke","version":"0"}}}'
+      smoke-headers: |
+        Accept: application/json, text/event-stream
+      smoke-expect: protocolVersion
+      smoke-bearer-secret-key: GUARDRAILS_TOKENS
