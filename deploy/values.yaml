@@ -8,12 +8,22 @@ service:
 # One replica only: the audit file is locked by a single writer.
 replicaCount: 1
 writablePaths: [/tmp, /data]
-existingSecret: mcp-guardrails-tokens   # holds GUARDRAILS_TOKENS=name=mgt_...
+existingSecret: mcp-guardrails-tokens # holds GUARDRAILS_TOKENS=name=mgt_...
 readinessProbe:
   exec:
-    command: [node, -e, "require('net').connect(8787,'127.0.0.1').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))"]
+    command:
+      [
+        node,
+        -e,
+        "require('net').connect(8787,'127.0.0.1').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))",
+      ]
   initialDelaySeconds: 3
 livenessProbe:
   exec:
-    command: [node, -e, "require('net').connect(8787,'127.0.0.1').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))"]
+    command:
+      [
+        node,
+        -e,
+        "require('net').connect(8787,'127.0.0.1').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))",
+      ]
   initialDelaySeconds: 10
