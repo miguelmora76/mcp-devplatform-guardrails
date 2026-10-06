@@ -1,0 +1,20 @@
+{
+  "synthetic": true,
+  "packages": {
+    "sample-ui-core": {
+      "versions": ["17.0.2", "18.0.0", "18.3.1", "19.0.0-beta.1"]
+    },
+    "sample-state": {
+      "versions": ["2.2.0", "2.2.5"]
+    },
+    "sample-css-tools": {
+      "versions": ["0.9.1", "0.10.0"]
+    },
+    "sample-flex-range": {
+      "versions": ["1.0.0", "1.5.0"]
+    },
+    "sample-bundler": {
+      "versions": ["5.4.0", "5.9.1"]
+    }
+  }
+}

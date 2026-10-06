@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "name": "sample-web-app",
+  "version": "3.0.0",
+  "dependencies": {
+    "sample-ui-core": "^17.0.2",
+    "sample-state": "^2.2.0",
+    "sample-css-tools": "^0.9.1",
+    "sample-flex-range": ">=1.0.0 <2.0.0"
+  },
+  "devDependencies": {
+    "sample-bundler": "~5.4.0"
+  }
+}

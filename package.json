@@ -1,0 +1,45 @@
+{
+  "name": "mcp-devplatform-guardrails",
+  "version": "0.1.0",
+  "description": "Sample MCP server giving AI agents guarded, auditable tools for dependency-upgrade planning and CI failure triage",
+  "type": "module",
+  "private": true,
+  "license": "UNLICENSED",
+  "engines": {
+    "node": "24.x"
+  },
+  "bin": {
+    "guardrails-server": "dist/bin/server.js",
+    "guardrails-approve": "dist/bin/approve.js",
+    "guardrails-new-token": "dist/bin/new-token.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test:coverage",
+    "start": "node dist/bin/server.js",
+    "start:http": "node dist/bin/server.js --http",
+    "approve": "node dist/bin/approve.js",
+    "walkthrough": "npm run build && node dist/bin/walkthrough.js",
+    "bench": "npm run build && node dist/bin/bench.js",
+    "new-token": "npm run build && node dist/bin/new-token.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.1",
+    "@vitest/coverage-v8": "5.0.3",
+    "eslint": "10.12.0",
+    "prettier": "3.9.9",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.1",
+    "vitest": "5.0.3"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "synthetic": true,
+  "name": "sample-node-api",
+  "version": "1.4.0",
+  "dependencies": {
+    "sample-http-kit": "^3.2.1",
+    "sample-router": "^4.1.0",
+    "sample-orm": "~2.0.3",
+    "sample-logger": "1.4.0"
+  },
+  "devDependencies": {
+    "sample-test-runner": "^1.9.0",
+    "sample-lint-kit": "^8.0.0"
+  }
+}

@@ -1,0 +1,19 @@
+# gitleaks configuration (used by the pre-commit hook and the CI job).
+# Starts from the built-in rules; the allow-list below names only the obviously fake,
+# token-shaped strings that tests and documentation need. A real secret never matches.
+title = "mcp-devplatform-guardrails"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Obviously fake test and documentation tokens"
+regexes = [
+  # Fake HTTP access tokens used in test/ (mgt_TEST..., mgt_wrong..., and similar).
+  '''mgt_(TEST|wrong|attacker|notthetoken|shortsecret|configuredtoken|EXAMPLE)[A-Za-z0-9_-]*''',
+  # A fake GitHub-token-shaped value built by the redactor specs.
+  '''ghp_(A1b2C3d4E5)+''',
+  '''ghp_SHOULDNOTBEECHOED''',
+  # AWS's own documentation-style fake key id, as used by the redactor specs.
+  '''AKIAFAKEFAKEFAKE1234''',
+]

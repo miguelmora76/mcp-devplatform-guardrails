@@ -1,0 +1,131 @@
+{
+  "snapshot": "sample-web-app",
+  "synthetic": true,
+  "runs": [
+    {
+      "runId": "run-2000",
+      "workflow": "CI",
+      "branch": "main",
+      "commit": "11aa22b",
+      "startedAt": "2026-09-21T09:00:00Z",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "jobId": "job-2000-1",
+          "name": "build",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Install dependencies",
+              "conclusion": "success",
+              "log": ["added 340 packages"]
+            },
+            {
+              "name": "Build",
+              "conclusion": "success",
+              "log": ["built in 4.2s"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "runId": "run-2001",
+      "workflow": "CI",
+      "branch": "feature/button-size",
+      "commit": "33cc44d",
+      "startedAt": "2026-09-22T10:00:00Z",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "jobId": "job-2001-1",
+          "name": "build",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Install dependencies",
+              "conclusion": "success",
+              "log": ["added 340 packages"]
+            },
+            {
+              "name": "Build",
+              "conclusion": "failure",
+              "log": [
+                "> sample-web-app@3.0.0 build",
+                "> tsc -p tsconfig.json",
+                "src/components/Button.tsx(14,7): error TS2322: Type 'string' is not assignable to type 'number'.",
+                "Found 1 error in src/components/Button.tsx:14",
+                "npm error Lifecycle script `build` failed with error"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "runId": "run-2002",
+      "workflow": "CI",
+      "branch": "feature/store-cleanup",
+      "commit": "55ee66f",
+      "startedAt": "2026-09-23T11:00:00Z",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "jobId": "job-2002-1",
+          "name": "lint",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Install dependencies",
+              "conclusion": "success",
+              "log": ["added 340 packages"]
+            },
+            {
+              "name": "Lint",
+              "conclusion": "failure",
+              "log": [
+                "> eslint . --max-warnings 0",
+                "/work/src/state/store.ts",
+                "  22:7  error  'unused' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+                "\u2716 3 problems (3 errors, 0 warnings)"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "runId": "run-2003",
+      "workflow": "CI",
+      "branch": "feature/ui-upgrade",
+      "commit": "77aa88b",
+      "startedAt": "2026-09-24T12:00:00Z",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "jobId": "job-2003-1",
+          "name": "build",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Install dependencies",
+              "conclusion": "failure",
+              "log": [
+                "npm error code ERESOLVE",
+                "npm error ERESOLVE could not resolve",
+                "npm error While resolving: sample-ui-core@18.3.1",
+                "npm error Found: sample-state@2.2.0",
+                "npm error Could not resolve dependency:"
+              ]
+            },
+            {
+              "name": "Build",
+              "conclusion": "skipped",
+              "log": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
