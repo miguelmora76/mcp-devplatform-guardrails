@@ -248,7 +248,10 @@ yourself: `ln -s ../../scripts/pre-commit-gitleaks.sh .git/hooks/pre-commit`).
 
 ## How it was built (AI-DLC records)
 
-This project was built with the AI-DLC workflow. The records of what was decided and why are
+This project was built with the AI-DLC workflow, using the open-source
+[AI-DLC framework from AWS Labs](https://github.com/awslabs/aidlc-workflows) (MIT-0 license).
+The framework files under `.claude/` come from that project; they are not my work. The records of
+what was decided and why are mine, and are
 in [`aidlc/spaces/default/intents/261002-mcp-guardrails/`](aidlc/spaces/default/intents/261002-mcp-guardrails/):
 
 - Ideation: [`ideation/`](aidlc/spaces/default/intents/261002-mcp-guardrails/ideation/) (intent, scope, approval hand-off)
