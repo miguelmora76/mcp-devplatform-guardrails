@@ -9,7 +9,7 @@ const coverageExclusions: readonly { readonly path: string; readonly reason: str
   {
     path: 'src/bin/**',
     reason:
-      'Process entry points only (server, approve, new-token, walkthrough, bench): each hands process globals (arguments, environment, signals, the terminal device, the exit code, real timers) to a function in src/ that has its own specs (serve, runApprove, generateToken, runWalkthrough, runBench) and prints the result. Apart from opening the terminal device (approve), no decision logic lives in them.',
+      'Process entry points only (server, approve, new-token, walkthrough, bench): each hands process globals (arguments, environment, signals, the terminal device, the exit code, real timers) to a function in src/ that has its own specs (serve, runApprove, generateToken, runWalkthrough, runBench) and prints the result. No decision logic lives in them.',
   },
 ];
 

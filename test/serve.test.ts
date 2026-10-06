@@ -130,6 +130,80 @@ describe('Given the server process starts in HTTP mode', () => {
   });
 });
 
+describe('Given the server cannot start for a reason it can explain', () => {
+  it('When the socket folder path is too long, then it refuses with a plain message and exit code 1', async () => {
+    const { deps, logLines } = setup([], {
+      GUARDRAILS_SOCKET_DIR: join(directory, 'long'.repeat(40), 'sock'),
+    });
+    expect(await serve(deps)).toBe(1);
+    const line = JSON.parse(logLines.at(-1) ?? '{}') as { err: string; code?: string };
+    expect(line.err).toContain('GUARDRAILS_SOCKET_DIR');
+    expect(line.err).toMatch(/\d+ bytes/);
+    expect(line).not.toHaveProperty('code');
+  });
+});
+
+describe('Given the server cannot start for an unexpected reason', () => {
+  it('When the error has a code such as EACCES, then the log line carries the code and nothing sensitive', async () => {
+    const { mkdir, chmod } = await import('node:fs/promises');
+    const run = join(directory, 'run');
+    await mkdir(run, { recursive: true, mode: 0o700 });
+    await chmod(run, 0o500);
+    try {
+      const { deps, logLines } = setup();
+      expect(await serve(deps)).toBe(1);
+      const text = logLines.at(-1) ?? '';
+      expect(JSON.parse(text)).toEqual({
+        level: 'error',
+        msg: 'server.start_failed',
+        err: 'The server failed to start.',
+        code: 'EACCES',
+      });
+      expect(text).not.toContain(directory);
+    } finally {
+      await chmod(run, 0o700);
+    }
+  });
+
+  it('When the error has no usable code, then only the generic message is logged', async () => {
+    const { deps, logLines } = setup();
+    const broken = { ...deps, env: { ...deps.env, GUARDRAILS_AUDIT_PATH: undefined } };
+    // A rng that throws a plain error without a code, while ids are created.
+    const failing = {
+      ...broken,
+      rng: {
+        bytes: (): Uint8Array => {
+          throw new Error('boom /secret/path');
+        },
+        float: () => 0,
+      },
+    };
+    expect(await serve(failing)).toBe(1);
+    const text = logLines.at(-1) ?? '';
+    expect(JSON.parse(text)).toEqual({
+      level: 'error',
+      msg: 'server.start_failed',
+      err: 'The server failed to start.',
+    });
+    expect(text).not.toContain('secret');
+  });
+
+  it('When the code is not a plain error code, then it is left out', async () => {
+    const { deps, logLines } = setup();
+    const failing = {
+      ...deps,
+      rng: {
+        bytes: (): Uint8Array => {
+          throw Object.assign(new Error('x'), { code: 'has a space /and/path' });
+        },
+        float: () => 0,
+      },
+    };
+    expect(await serve(failing)).toBe(1);
+    expect(logLines.at(-1)).not.toContain('"code"');
+  });
+});
+
 describe('Given the server cannot start', () => {
   it('When the configuration is invalid, then it says which setting is wrong and exits with 1', async () => {
     const { deps, logLines } = setup([], { GUARDRAILS_LOG_LEVEL: 'chatty' });

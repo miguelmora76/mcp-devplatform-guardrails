@@ -77,13 +77,28 @@ export async function serve(deps: ServeDeps): Promise<number | undefined> {
     }
     return undefined;
   } catch (error) {
-    const message =
+    const explained =
       error instanceof ConfigError ||
       error instanceof AuditLockedError ||
-      error instanceof UnsafeSocketDirectoryError
-        ? error.message
-        : 'The server failed to start.';
-    deps.logSink(JSON.stringify({ level: 'error', msg: 'server.start_failed', err: message }));
+      error instanceof UnsafeSocketDirectoryError;
+    const message = explained ? error.message : 'The server failed to start.';
+    // For an unexpected error only its code (EACCES, EINVAL, ...) is logged, never the
+    // message, stack or any path, so a person can search for it without leaking details.
+    const code = safeCode(error);
+    deps.logSink(
+      JSON.stringify({
+        level: 'error',
+        msg: 'server.start_failed',
+        err: message,
+        ...(code === undefined || explained ? {} : { code }),
+      }),
+    );
     return 1;
   }
+}
+
+/** The Node error code (for example `EACCES`) when it is a plain upper-case code. */
+function safeCode(error: unknown): string | undefined {
+  const code = (error as { code?: unknown } | null)?.code;
+  return typeof code === 'string' && /^[A-Z][A-Z0-9_]{1,39}$/.test(code) ? code : undefined;
 }
