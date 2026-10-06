@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   smoke-deploy:
-    uses: miguelmora76/platform-workflows/.github/workflows/build-deploy.yml@add-smoke-cli
+    uses: miguelmora76/platform-workflows/.github/workflows/build-deploy.yml@main
     with:
       service: mcp-devplatform-guardrails
       values-file: deploy/values.yaml
@@ -26,4 +26,3 @@ jobs:
         Accept: application/json, text/event-stream
       smoke-expect: protocolVersion
       smoke-bearer-secret-key: GUARDRAILS_TOKENS
-      platform-ref: add-smoke-cli
