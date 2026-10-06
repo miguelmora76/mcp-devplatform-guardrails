@@ -5,6 +5,11 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    ignore:
+      # The project is pinned to Node 24 (.nvmrc, engines.node), so @types/node stays on
+      # the 24.x line. Revisit this rule when the Node pin changes.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
   - package-ecosystem: github-actions
     directory: /
     schedule:
