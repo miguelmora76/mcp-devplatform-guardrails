@@ -19,14 +19,65 @@ All data is **synthetic**: the three bundled sample repositories in `snapshots/`
 for this project and are labelled as such (`"synthetic": true`). Nothing contacts a real CI
 system, and no real credentials, private repositories or production data are used.
 
+> **Honest scope:** this is a learning and portfolio project that shows how I would design safe
+> tools for AI agents. It has no real users and makes no production-scale claims. The CI system
+> it can "re-run" jobs in is a simulation, so approving a write has no effect outside this process.
+
 ## Tools
 
-| Tool                       | Kind  | What it does                                                                                          |
-| -------------------------- | ----- | ----------------------------------------------------------------------------------------------------- |
-| `plan_dependency_upgrades` | read  | Lists outdated dependencies with a patch/minor/major rating, advisories each upgrade fixes, and order |
-| `triage_ci_failure`        | read  | Classifies a failed run, names the failing step, quotes key log lines, says if it happened before     |
-| `get_ci_job`               | read  | Shows the status and attempt of a job in the simulated CI                                             |
-| `rerun_ci_job`             | write | Re-runs a failed job in the simulated CI **only after a human approval**                              |
+| Tool                       | Kind  | Inputs                                 | What it does                                                                                          |
+| -------------------------- | ----- | -------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `plan_dependency_upgrades` | read  | `repo`                                 | Lists outdated dependencies with a patch/minor/major rating, advisories each upgrade fixes, and order |
+| `triage_ci_failure`        | read  | `repo`, `runId`                        | Classifies a failed run, names the failing step, quotes key log lines, says if it happened before     |
+| `get_ci_job`               | read  | `repo`, `jobId`                        | Shows the status and attempt of a job in the simulated CI                                             |
+| `rerun_ci_job`             | write | `repo`, `jobId`, `approvalRequestId`\* | Re-runs a failed job in the simulated CI **only after a human approval**                              |
+
+\* `approvalRequestId` is omitted on the first call and supplied on the retry (see
+[Approving a write](#approving-a-write)). Every input is validated at the boundary, and text
+from outside sources (CI logs, advisory text) is only ever quoted back as data.
+
+### Bundled sample repositories
+
+All three are synthetic and live in [`snapshots/`](snapshots/). Pass the name as `repo`.
+
+| `repo`            | Dependencies | CI runs (`runId`)                                                   |
+| ----------------- | ------------ | ------------------------------------------------------------------- |
+| `sample-node-api` | 6            | `run-1000` (passed), `run-1001` and `run-1002` (failed)             |
+| `sample-web-app`  | 5            | `run-2000` (passed), `run-2001`, `run-2002` and `run-2003` (failed) |
+| `sample-cli-tool` | 3            | `run-3000` (passed), `run-3001` and `run-3002` (failed)             |
+
+Job IDs follow the run: run `run-1001` has the job `job-1001-1`.
+
+### Example output
+
+From `npm run walkthrough` (trimmed). The upgrade plan for `sample-node-api` puts security
+fixes first, then lower-risk upgrades before higher-risk ones:
+
+```text
+1. sample-http-kit      3.2.1 -> 3.2.4  patch  Fixes 1 security advisory (worst: high); done first to reduce exposure.
+2. sample-orm           2.0.3 -> 3.1.0  major  Fixes 1 security advisory (worst: moderate); done first to reduce exposure.
+3. sample-router        4.1.0 -> 4.6.2  minor  Moderate risk; done after the patch upgrades so a problem is easier to attribute.
+4. sample-test-runner   1.9.0 -> 1.11.0 minor  Moderate risk; done after the patch upgrades so a problem is easier to attribute.
+```
+
+Triage of `run-1001` names the category, the failing step and quotes the log:
+
+```text
+run run-1001: test_failure, failing step "Run tests" in job "test"
+|  FAIL  src/orders/total.test.ts > calculateTotal > applies the bulk discount
+| AssertionError: expected 94.5 to be 90
+suspected cause: A test assertion no longer holds after a code or test change.
+next action:     Run the failing test locally and compare the expected and actual values.
+```
+
+A write with no approval is refused and leaves the simulated CI unchanged; the 31st read in a
+minute is rate-limited; and each of these calls leaves exactly one audit line:
+
+```text
+approval_required: This tool changes state and needs a human approval. Ask the person to run the approve command...
+rate_limited: Too many calls from this client. Wait for the window to pass and try again. Retry after 60 seconds.
+{"ts":"...","callId":"call_...","phase":"complete","tool":"rerun_ci_job","client":"agent-write","inputs":{"repo":"sample-node-api","jobId":"job-1001-1"},"outcome":"refused"}
+```
 
 ## Setup
 
@@ -71,6 +122,19 @@ node dist/bin/server.js
 For example, in an MCP client configuration use the command `node` with the argument
 `/path/to/this/repo/dist/bin/server.js`. Operational logs (JSON lines) go to standard
 error; standard output carries only the protocol.
+
+A typical client entry looks like this (the exact file and key names depend on the client):
+
+```json
+{
+  "mcpServers": {
+    "devplatform-guardrails": {
+      "command": "node",
+      "args": ["/path/to/this/repo/dist/bin/server.js"]
+    }
+  }
+}
+```
 
 Each protocol message may be at most 64 KiB. A larger one is never parsed: the server
 answers with a JSON-RPC error (code `-32600`, `data.code` `message_too_large`; the request
@@ -194,4 +258,6 @@ in [`aidlc/spaces/default/intents/261002-mcp-guardrails/`](aidlc/spaces/default/
 - Construction: [`construction/`](aidlc/spaces/default/intents/261002-mcp-guardrails/construction/)
   ([NFR requirements](aidlc/spaces/default/intents/261002-mcp-guardrails/construction/nfr-requirements/),
   [NFR design](aidlc/spaces/default/intents/261002-mcp-guardrails/construction/nfr-design/),
-  [code generation](aidlc/spaces/default/intents/261002-mcp-guardrails/construction/code-generation/))
+  [code generation](aidlc/spaces/default/intents/261002-mcp-guardrails/construction/code-generation/),
+  [build and test](aidlc/spaces/default/intents/261002-mcp-guardrails/construction/build-and-test/),
+  [CI pipeline](aidlc/spaces/default/intents/261002-mcp-guardrails/construction/ci-pipeline/))
