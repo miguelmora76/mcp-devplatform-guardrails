@@ -84,3 +84,10 @@ aidlc/diagnostics/
 # aidlc/spaces/*/intents/*/<phase>/<stage>/*.md (artifacts + diary).
 .claude/settings.local.json
 # END AI-DLC:gitignore
+
+# Application build, test and runtime output
+dist/
+coverage/
+audit/
+.env
+.env.*

@@ -1,0 +1,21 @@
+{
+  "synthetic": true,
+  "advisories": [
+    {
+      "id": "SYN-2026-0101",
+      "package": "sample-ui-core",
+      "severity": "critical",
+      "summary": "Server-side rendering can emit unescaped user text.",
+      "introduced": "17.0.0",
+      "fixed": "18.0.0"
+    },
+    {
+      "id": "SYN-2026-0102",
+      "package": "sample-ui-core",
+      "severity": "low",
+      "summary": "Dev-tool overlay leaks component names.",
+      "introduced": "17.0.0",
+      "fixed": "18.3.1"
+    }
+  ]
+}

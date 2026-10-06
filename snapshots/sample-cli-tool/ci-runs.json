@@ -1,0 +1,92 @@
+{
+  "snapshot": "sample-cli-tool",
+  "synthetic": true,
+  "runs": [
+    {
+      "runId": "run-3000",
+      "workflow": "CI",
+      "branch": "main",
+      "commit": "99bb00c",
+      "startedAt": "2026-09-18T08:00:00Z",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "jobId": "job-3000-1",
+          "name": "test",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Run tests",
+              "conclusion": "success",
+              "log": [" Test Files  9 passed (9)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "runId": "run-3001",
+      "workflow": "CI",
+      "branch": "main",
+      "commit": "1d2e3f4",
+      "startedAt": "2026-09-20T08:00:00Z",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "jobId": "job-3001-1",
+          "name": "test",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Install dependencies",
+              "conclusion": "success",
+              "log": ["added 120 packages"]
+            },
+            {
+              "name": "Run tests",
+              "conclusion": "failure",
+              "log": [
+                " FAIL  test/download.test.ts > downloads release asset",
+                "Error: connect ETIMEDOUT 203.0.113.10:443",
+                "    at TCPConnectWrap.afterConnect (node:net:1637:16)",
+                " Test Files  1 failed | 8 passed (9)"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "runId": "run-3002",
+      "workflow": "CI",
+      "branch": "main",
+      "commit": "5a6b7c8",
+      "startedAt": "2026-09-27T08:00:00Z",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "jobId": "job-3002-1",
+          "name": "test",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Install dependencies",
+              "conclusion": "success",
+              "log": ["added 120 packages"]
+            },
+            {
+              "name": "Run tests",
+              "conclusion": "failure",
+              "log": [
+                " FAIL  test/download.test.ts > downloads release asset",
+                "Error: connect ETIMEDOUT 203.0.113.11:443",
+                "    at TCPConnectWrap.afterConnect (node:net:1637:16)",
+                " Test Files  1 failed | 8 passed (9)"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "name": "sample-cli-tool",
+  "version": "0.8.2",
+  "dependencies": {
+    "sample-args": "^2.0.0",
+    "sample-color": "^1.1.0",
+    "sample-yaml": "3.0.0"
+  },
+  "devDependencies": {}
+}
