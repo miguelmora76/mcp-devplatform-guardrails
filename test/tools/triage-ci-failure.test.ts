@@ -41,6 +41,20 @@ const expectations = [
 
 describe('Given failed-run snapshots with a known cause', () => {
   it.each(expectations)(
+    'When %s %s is triaged, then failingJobId is the ID of the failing job',
+    async (repo, runId) => {
+      const report = await triage(repo, runId);
+      const text = await readFile(join(process.cwd(), 'snapshots', repo, 'ci-runs.json'), 'utf8');
+      const failing = ciRunsDocumentSchema
+        .parse(JSON.parse(text))
+        .runs.find((run) => run.runId === runId)
+        ?.jobs.find((job) => job.name === report.failingJob);
+      expect(failing?.jobId).toBeDefined();
+      expect(report.failingJobId).toBe(failing?.jobId);
+    },
+  );
+
+  it.each(expectations)(
     'When %s %s is triaged, then the category is %s and the failing step is %s',
     async (repo, runId, category, step) => {
       const report = await triage(repo, runId);
