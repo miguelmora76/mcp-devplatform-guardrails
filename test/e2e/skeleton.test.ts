@@ -34,6 +34,7 @@ describe('Given a running server with a bundled failed-run snapshot', () => {
         runId: 'run-1001',
         category: 'test_failure',
         failingJob: 'test',
+        failingJobId: 'job-1001-1',
         failingStep: 'Run tests',
       });
       const report = result.structuredContent as { excerpts: string[]; suspectedCause: string };

@@ -25,12 +25,12 @@ system, and no real credentials, private repositories or production data are use
 
 ## Tools
 
-| Tool                       | Kind  | Inputs                                 | What it does                                                                                          |
-| -------------------------- | ----- | -------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `plan_dependency_upgrades` | read  | `repo`                                 | Lists outdated dependencies with a patch/minor/major rating, advisories each upgrade fixes, and order |
-| `triage_ci_failure`        | read  | `repo`, `runId`                        | Classifies a failed run, names the failing step, quotes key log lines, says if it happened before     |
-| `get_ci_job`               | read  | `repo`, `jobId`                        | Shows the status and attempt of a job in the simulated CI                                             |
-| `rerun_ci_job`             | write | `repo`, `jobId`, `approvalRequestId`\* | Re-runs a failed job in the simulated CI **only after a human approval**                              |
+| Tool                       | Kind  | Inputs                                 | What it does                                                                                                            |
+| -------------------------- | ----- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `plan_dependency_upgrades` | read  | `repo`                                 | Lists outdated dependencies with a patch/minor/major rating, advisories each upgrade fixes, and order                   |
+| `triage_ci_failure`        | read  | `repo`, `runId`                        | Classifies a failed run, names the failing step and job (with its ID), quotes key log lines, says if it happened before |
+| `get_ci_job`               | read  | `repo`, `jobId`                        | Shows the status and attempt of a job in the simulated CI                                                               |
+| `rerun_ci_job`             | write | `repo`, `jobId`, `approvalRequestId`\* | Re-runs a failed job in the simulated CI **only after a human approval**                                                |
 
 \* `approvalRequestId` is omitted on the first call and supplied on the retry (see
 [Approving a write](#approving-a-write)). Every input is validated at the boundary, and text
