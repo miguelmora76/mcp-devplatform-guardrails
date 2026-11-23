@@ -85,9 +85,13 @@ aidlc/diagnostics/
 .claude/settings.local.json
 # END AI-DLC:gitignore
 
+# Generated copy of aidlc/spaces/*/memory/ (the committed source of truth),
+# rewritten by AI-DLC each session.
+aidlc/active-memory/
+
 # Application build, test and runtime output
 dist/
 coverage/
-audit/
+/audit/
 .env
 .env.*
