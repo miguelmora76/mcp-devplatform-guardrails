@@ -14,8 +14,20 @@ updates:
       # npm ci with ERESOLVE. Revisit once typescript-eslint supports TypeScript 7.
       - dependency-name: 'typescript'
         update-types: ['version-update:semver-major']
+    groups:
+      # @vitest/coverage-v8 has an exact peer dependency on vitest, so the two must move together.
+      vitest:
+        patterns:
+          - 'vitest'
+          - '@vitest/coverage-v8'
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    groups:
+      # init and analyze must run the same codeql-action version.
+      codeql-action:
+        patterns:
+          - 'github/codeql-action/init'
+          - 'github/codeql-action/analyze'
