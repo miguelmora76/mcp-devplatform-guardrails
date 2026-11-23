@@ -5,5 +5,13 @@
   "configNextStep": "open Claude Code in this project and run `/aidlc --doctor`",
   "name": "claude",
   "harnessDir": ".claude",
-  "rulesSubdir": "rules"
+  "rulesSubdir": "rules",
+  "modelsAnswer": {
+    "schemaVersion": 1,
+    "kept": true
+  },
+  "providers": {
+    "schemaVersion": 1,
+    "provider": "current"
+  }
 }
